@@ -5,6 +5,17 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+" neovim lang
+language en_US
+
+" vim markdown
+let g:vim_markdown_folding_disabled = 1                                                                                                                                                                     
+let g:vim_markdown_toc_autofit = 1
+
+" vim multiple cursors
+let g:multi_cursor_next_key='<C-n>'                                                                                                                                                                         
+let g:multi_cursor_skip_key='<C-b>'
+
 " Directory for plugins
 call plug#begin('~/.vim/plugged')
 
@@ -28,6 +39,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'w0rp/ale'
 Plug 'kien/ctrlp.vim'
 Plug 'edkolev/tmuxline.vim'
+Plug 'uarun/vim-protobuf'
 
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -47,9 +59,17 @@ Plug 'zchee/deoplete-go', { 'do': 'make'}      " Go auto completion
 " Color themes
 Plug 'morhetz/gruvbox'
 
-" icons?
+" File icons
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
+
+" go test preview window
+let g:go_term_enabled = 1
+let g:go_term_mode = 'split'
+let g:go_term_height = 10
+let g:go_term_width = 30
+let g:go_list_type = "quickfix"
 
 " ctrlp
 let g:ctrlp_map = '<c-p>'
@@ -92,28 +112,12 @@ let delimitMate_expand_cr=1
 " deoplete
 let g:deoplete#enable_at_startup = 1
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-" color schemes
-set background=dark
-" set t_Co=256
+autocmd InsertLeave * if pumvisible() == 0 | pclose | endif "autoclose preview window
 
 colorscheme gruvbox
 
-" Tabs
-set expandtab
-set shiftwidth=4
-set softtabstop=4
-set tabstop=4
-
-set title
-set cmdheight=1
-
 " normal mode enter to go to line
 nnoremap <CR> G
-
-" line numbers
-set number
-set cursorline
 
 " remap leader key
 let mapleader=","
@@ -137,19 +141,43 @@ noremap 0 $
 nnoremap 9 0
 noremap 9 0
 
-" Incremental search
+" General settings 
 set incsearch
+set nohlsearch
+set colorcolumn=81
+set autoread
+set autoindent
+set smartindent
+set number                                                                                                                                                                            
+set relativenumber              
+set ruler
+set updatetime=100
+set expandtab
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+set title
+set cmdheight=1
+set background=dark
+set cursorline
+set hidden
+set encoding=UTF-8
+
+highlight LineNr ctermfg=grey
+" set t_Co=256
+
+" Close vim if NERDTree is the only opened window.
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " vim-airline
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_theme='wombat'
+let g:airline_theme='papercolor'
 let g:airline_solarized_bg='dark'
-let g:airline_powerline_fonts = 1
+" let g:airline_powerline_fonts = 1
 
 " This allows buffers to be hidden if you've modified a buffer.
-set hidden
 
 " To open a new empty buffer
 " This replaces :tabnew which I used to bind to this mapping
@@ -204,6 +232,9 @@ map <leader>\ :TagbarToggle<CR>
 
 " Resize window to 80 width with ,8
 map <leader>8 :vertical resize 80<CR>
+"
+" nerdtree
+let NERDTreeShowHidden=1
 
 " ,f to find in nerdtree
 map <leader>f :NERDTreeFind<CR>
@@ -246,6 +277,29 @@ let g:go_highlight_types = 1
 let g:go_auto_sameids = 10
 let g:go_addtags_transform = "snakecase"
 let g:go_fmt_command = "goimports"
+let g:go_echo_command_info = 1
+let g:go_test_show_name = 1
+let g:go_list_type = "quickfix"
+
+" gometalinter configuration
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_command = ""
+let g:go_metalinter_deadline = "5s"
+let g:go_metalinter_autosave_enabled = [
+    \ 'errcheck',
+    \ 'deadcode',
+    \ 'gas',
+    \ 'goconst',
+    \ 'gocyclo',
+    \ 'golint',
+    \ 'gosimple',
+    \ 'ineffassign',
+    \ 'vet',
+    \ 'vetshadow'
+\]
+
+ " Set whether the JSON tags should be snakecase or camelcase.
+ let g:go_addtags_transform = "snakecase"
 
 " tagbar
 let g:tagbar_type_go = {  
