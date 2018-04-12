@@ -27,7 +27,6 @@ Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'  
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'wincent/command-t'
 Plug 'easymotion/vim-easymotion'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree'
@@ -37,7 +36,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'Raimondi/delimitMate'
 Plug 'w0rp/ale'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'uarun/vim-protobuf'
 
@@ -58,6 +57,7 @@ Plug 'zchee/deoplete-go', { 'do': 'make'}      " Go auto completion
 
 " Color themes
 Plug 'morhetz/gruvbox'
+Plug 'bitfield/vim-gitgo'
 
 " File icons
 Plug 'ryanoasis/vim-devicons'
@@ -115,6 +115,7 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 autocmd InsertLeave * if pumvisible() == 0 | pclose | endif "autoclose preview window
 
 colorscheme gruvbox
+autocmd BufNewFile,BufRead *.go colorscheme gitgo
 
 " normal mode enter to go to line
 nnoremap <CR> G
@@ -164,7 +165,6 @@ set hidden
 set encoding=UTF-8
 
 highlight LineNr ctermfg=grey
-" set t_Co=256
 
 " Close vim if NERDTree is the only opened window.
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
@@ -283,20 +283,8 @@ let g:go_list_type = "quickfix"
 
 " gometalinter configuration
 let g:go_metalinter_autosave = 1
-let g:go_metalinter_command = ""
+" let g:go_metalinter_command = ""
 let g:go_metalinter_deadline = "5s"
-let g:go_metalinter_autosave_enabled = [
-    \ 'errcheck',
-    \ 'deadcode',
-    \ 'gas',
-    \ 'goconst',
-    \ 'gocyclo',
-    \ 'golint',
-    \ 'gosimple',
-    \ 'ineffassign',
-    \ 'vet',
-    \ 'vetshadow'
-\]
 
  " Set whether the JSON tags should be snakecase or camelcase.
  let g:go_addtags_transform = "snakecase"
