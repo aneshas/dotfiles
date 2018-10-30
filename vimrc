@@ -59,18 +59,20 @@ Plug 'zchee/deoplete-go', { 'do': 'make'}      " Go auto completion
 Plug 'morhetz/gruvbox'
 Plug 'bitfield/vim-gitgo'
 Plug 'rakr/vim-one'
+Plug 'w0ng/vim-hybrid'
 
 " File icons
 Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
-" go test preview window
-let g:go_term_enabled = 1
-let g:go_term_mode = 'split'
-let g:go_term_height = 10
-let g:go_term_width = 30
-let g:go_list_type = "quickfix"
+" set background=dark
+
+let g:hybrid_custom_term_colors = 1
+colorscheme hybrid
+" colorscheme one
+" colorscheme gruvbox
+" autocmd BufNewFile,BufRead *.go colorscheme gitgo
 
 " ctrlp
 let g:ctrlp_map = '<c-p>'
@@ -131,12 +133,6 @@ if (empty($TMUX))
     set termguicolors
   endif
 endif
-
-colorscheme one
-set background=dark
-
-" colorscheme gruvbox
-" autocmd BufNewFile,BufRead *.go colorscheme gitgo
 
 " normal mode enter to go to line
 nnoremap <CR> G
@@ -302,13 +298,19 @@ let g:go_echo_command_info = 1
 let g:go_test_show_name = 1
 let g:go_list_type = "quickfix"
 
-" gometalinter configuration
-let g:go_metalinter_autosave = 1
-" let g:go_metalinter_command = ""
-let g:go_metalinter_deadline = "5s"
-
  " Set whether the JSON tags should be snakecase or camelcase.
- let g:go_addtags_transform = "snakecase"
+let g:go_addtags_transform = "snakecase"
+
+" go test preview window
+let g:go_term_enabled = 0
+let g:go_term_mode = 'split'
+let g:go_term_height = 10
+let g:go_term_width = 30
+
+augroup auto_go
+	autocmd!
+	autocmd BufWritePost *.go :GoTest
+augroup end
 
 " tagbar
 let g:tagbar_type_go = {  
