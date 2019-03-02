@@ -110,7 +110,7 @@ let g:ale_sign_warning = '⚠'
 let g:airline#extensions#ale#enabled = 1
 
 " delimitMate
-let delimitMate_expand_cr=1
+" let delimitMate_expand_cr=1
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
