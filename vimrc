@@ -5,6 +5,8 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+set t_Co=256
+
 " neovim lang
 language en_US
 
@@ -19,12 +21,8 @@ let g:multi_cursor_skip_key='<C-b>'
 " Directory for plugins
 call plug#begin('~/.vim/plugged')
 
-" Deps
 Plug 'godlygeek/tabular' " for markdown
 Plug 'tpope/vim-rhubarb' " for fugitive
-
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'  
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'easymotion/vim-easymotion'
@@ -39,39 +37,31 @@ Plug 'w0rp/ale'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'uarun/vim-protobuf'
-
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-
-" Lang support
-Plug 'fatih/vim-go'
+Plug 'SirVer/ultisnips'
+Plug 'Valloric/YouCompleteMe'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'plasticboy/vim-markdown'
 Plug 'chr4/nginx.vim'
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' } " Go auto completion
-Plug 'zchee/deoplete-go', { 'do': 'make'}      " Go auto completion
+Plug 'ryanoasis/vim-devicons'
 
-" Color themes
 Plug 'morhetz/gruvbox'
 Plug 'bitfield/vim-gitgo'
 Plug 'rakr/vim-one'
 Plug 'w0ng/vim-hybrid'
-
-" File icons
-Plug 'ryanoasis/vim-devicons'
+Plug 'fatih/molokai'
+Plug 'sickill/vim-monokai'
 
 call plug#end()
 
-" set background=dark
-
+set background=dark
 let g:hybrid_custom_term_colors = 1
+let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 colorscheme hybrid
+" colorscheme monokai
 " colorscheme one
 " colorscheme gruvbox
+" colorscheme molokai
 " autocmd BufNewFile,BufRead *.go colorscheme gitgo
 
 " ctrlp
@@ -111,11 +101,6 @@ let g:airline#extensions#ale#enabled = 1
 
 " delimitMate
 " let delimitMate_expand_cr=1
-
-" deoplete
-let g:deoplete#enable_at_startup = 1
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-autocmd InsertLeave * if pumvisible() == 0 | pclose | endif "autoclose preview window
 
 "Credit joshdick
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
@@ -301,8 +286,13 @@ let g:go_list_type = "quickfix"
  " Set whether the JSON tags should be snakecase or camelcase.
 let g:go_addtags_transform = "snakecase"
 
+" ycm
+let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+
 " go test preview window
-let g:go_term_enabled = 0
+let g:go_term_enabled = 1
 let g:go_term_mode = 'split'
 let g:go_term_height = 10
 let g:go_term_width = 30
