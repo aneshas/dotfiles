@@ -119,9 +119,5 @@ export PATH=$PATH:$HOME/go/bin
 # tmux
 alias tmux="TERM=xterm-256color tmux"
 
-# vim
-alias vi="TERM=screen-256color vim"
-alias vim="TERM=screen-256color vim"
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

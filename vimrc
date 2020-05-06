@@ -7,9 +7,6 @@ endif
 
 set t_Co=256
 
-" neovim lang
-language en_US
-
 " vim markdown
 let g:vim_markdown_folding_disabled = 1                                                                                                                                                                     
 let g:vim_markdown_toc_autofit = 1
@@ -44,6 +41,8 @@ Plug 'plasticboy/vim-markdown'
 Plug 'chr4/nginx.vim'
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' } " Go auto completion
 Plug 'ryanoasis/vim-devicons'
+Plug 'vim-scripts/dbext.vim'
+Plug 'lifepillar/pgsql.vim'
 
 Plug 'morhetz/gruvbox'
 Plug 'bitfield/vim-gitgo'
