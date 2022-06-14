@@ -119,4 +119,9 @@ alias tmux="TERM=xterm-256color tmux"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# TS
+export GOPRIVATE=bitbucket.org/gv24,gitlab.thinksurance.de
+export PATH=$PATH:$HOME/sh
 
