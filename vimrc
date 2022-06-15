@@ -6,7 +6,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 set t_Co=256
-
 " vim markdown
 let g:vim_markdown_folding_disabled = 1                                                                                                                                                                     
 let g:vim_markdown_toc_autofit = 1
@@ -18,29 +17,28 @@ let g:multi_cursor_skip_key='<C-b>'
 " Directory for plugins
 call plug#begin('~/.vim/plugged')
 
-Plug 'godlygeek/tabular' " for markdown
+Plug 'ryanoasis/vim-devicons'
+Plug 'junegunn/goyo.vim'
 Plug 'tpope/vim-rhubarb' " for fugitive
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'easymotion/vim-easymotion'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'Raimondi/delimitMate'
-Plug 'w0rp/ale'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'uarun/vim-protobuf'
-Plug 'SirVer/ultisnips'
-" Plug 'Valloric/YouCompleteMe'
+" Plug 'SirVer/ultisnips'
+Plug 'Valloric/YouCompleteMe'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'plasticboy/vim-markdown'
 Plug 'chr4/nginx.vim'
-Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' } " Go auto completion
-Plug 'ryanoasis/vim-devicons'
 Plug 'vim-scripts/dbext.vim'
 Plug 'lifepillar/pgsql.vim'
 
@@ -52,12 +50,14 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mattn/emmet-vim'
 Plug 'mlaursen/vim-react-snippets'
 
+" Themes
 Plug 'morhetz/gruvbox'
 Plug 'bitfield/vim-gitgo'
 Plug 'rakr/vim-one'
 Plug 'w0ng/vim-hybrid'
 Plug 'fatih/molokai'
 Plug 'sickill/vim-monokai'
+Plug 'sainnhe/gruvbox-material'
 
 " JS
 autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
@@ -65,13 +65,20 @@ autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --
 call plug#end()
 
 set background=dark
-let g:hybrid_custom_term_colors = 1
-let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
+" let g:hybrid_custom_term_colors = 1
+" let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 " colorscheme hybrid
 " colorscheme monokai
 " colorscheme one
 " colorscheme gruvbox
-colorscheme molokai
+
+" Gruvbox material
+let g:gruvbox_material_better_performance = 1
+" let g:gruvbox_material_background = 'soft'
+" let g:gruvbox_material_disable_italic_comment = 1
+let g:gruvbox_material_foreground = 'mix'
+colorscheme gruvbox-material
+" colorscheme molokai
 " autocmd BufNewFile,BufRead *.go colorscheme gitgo
 
 " ctrlp
@@ -110,7 +117,7 @@ let g:ale_sign_warning = '⚠'
 let g:airline#extensions#ale#enabled = 1
 
 " delimitMate
-let delimitMate_expand_cr=1
+let delimitMate_expand_cr=2
 
 "Credit joshdick
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
@@ -185,9 +192,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_theme='papercolor'
+let g:airline_theme='jellybeans'
 let g:airline_solarized_bg='dark'
-" let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 1
 
 " This allows buffers to be hidden if you've modified a buffer.
 
@@ -254,46 +261,18 @@ map <leader>f :NERDTreeFind<CR>
 " autoclose nerdtree 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-" nerdtree file type highlight
-function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-     exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-      exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-endfunction
-
-call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
-call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
-call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
-
 " vim-go
 let g:go_snippet_engine = "neosnippet"
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
 let g:go_disable_autoinstall = 0
-let g:go_highlight_extra_types = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
 let g:go_highlight_fields = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_types = 1
-let g:go_auto_sameids = 10
+let g:go_auto_type_info = 1
 let g:go_addtags_transform = "snakecase"
 let g:go_fmt_command = "goimports"
 let g:go_echo_command_info = 1
 let g:go_test_show_name = 1
 let g:go_list_type = "quickfix"
-
- " Set whether the JSON tags should be snakecase or camelcase.
 let g:go_addtags_transform = "snakecase"
 
 " ycm
@@ -302,7 +281,7 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 
 " go test preview window
-let g:go_term_enabled = 1
+let g:go_term_enabled = 0
 let g:go_term_mode = 'split'
 let g:go_term_height = 10
 let g:go_term_width = 30
@@ -355,7 +334,7 @@ au FileType go nmap <Leader>gd <Plug>(go-doc)
 au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>gb <Plug>(go-build)
-au FileType go nmap <leader>gt <Plug>(go-test)
+au FileType go nmap <leader>gt :GoTestFunc<CR>
 au FileType go nmap <leader>c <Plug>(go-coverage)
 au FileType go nmap <Leader>ds <Plug>(go-def-split)
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
@@ -366,7 +345,6 @@ au FileType go nmap <Leader>i <Plug>(go-info)
 au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
 
 let g:go_auto_type_info=1
-
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
@@ -386,12 +364,12 @@ set hidden
 set nobackup
 set nowritebackup
 
-" Give more space for displaying messages.
-set cmdheight=2
+" Give more space for displaying messages (tabbar)
+set cmdheight=1
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=300
+set updatetime=800
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
@@ -453,7 +431,7 @@ function! s:show_documentation()
 endfunction
 
 " Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
@@ -494,9 +472,4 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 

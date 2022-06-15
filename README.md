@@ -15,6 +15,11 @@
 `brew install ctags`
 
 ### Install powerline fonts
+### Install nerd fonts
+`brew tap homebrew/cask-fonts`
+`brew install --cask font-agave-nerd-font`
+Set iTerm text profile, height 140
+
     
 ### Create sym links
 eg. `~/.config/nvim/init.vim` for neovim or `~/.vimrc` for vim
