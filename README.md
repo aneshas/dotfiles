@@ -14,12 +14,17 @@
 ### Install ctags 
 `brew install ctags`
 
-### Install powerline fonts
 ### Install nerd fonts
 `brew tap homebrew/cask-fonts`
-`brew install --cask font-agave-nerd-font`
-Set iTerm text profile, height 140
 
+`brew install --cask font-agave-nerd-font`
+
+Set iTerm text profile, height 130 Font 15-17
+
+### Compile ycm
+`brew install cmake`
+
+`./install.py --go-completer`
     
 ### Create sym links
 eg. `~/.config/nvim/init.vim` for neovim or `~/.vimrc` for vim
