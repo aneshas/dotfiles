@@ -113,6 +113,8 @@ ls='ls --color=tty'
 grep='grep  --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
 
 export PATH=$PATH:$HOME/go/bin
+export PATH=$PATH:$HOME/sh
+export PATH=$PATH:$HOME/flutter-sdk/flutter/bin
 
 # tmux
 alias tmux="TERM=xterm-256color tmux"
@@ -120,3 +122,5 @@ alias tmux="TERM=xterm-256color tmux"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# TS
+export GOPRIVATE=bitbucket.org/gv24,gitlab.thinksurance.de
