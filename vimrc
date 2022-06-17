@@ -125,6 +125,8 @@ let g:airline#extensions#ale#enabled = 1
 " delimitMate
 let delimitMate_expand_cr=2
 
+" Tmux
+let g:tmuxline_powerline_separators = 0
 "Credit joshdick
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
