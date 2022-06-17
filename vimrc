@@ -59,6 +59,12 @@ Plug 'fatih/molokai'
 Plug 'sickill/vim-monokai'
 Plug 'sainnhe/gruvbox-material'
 
+" Devicons nerdtree spacing and arrows
+let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
+let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
+let g:NERDTreeDirArrowExpandable = "\u00a0"
+let g:NERDTreeDirArrowCollapsible = "\u00a0"
+
 " JS
 autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
 
@@ -264,7 +270,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " vim-go
 let g:go_snippet_engine = "neosnippet"
 let g:go_disable_autoinstall = 0
-let g:go_highlight_functions = 1
+" let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
 let g:go_highlight_fields = 1
 let g:go_auto_type_info = 1

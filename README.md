@@ -25,6 +25,12 @@ Set iTerm text profile, height 130 Font 15-17
 `brew install cmake`
 
 `./install.py --go-completer`
+
+### Install tmux
+`brew install tmux`
+
+- Run `tic -x dotfiles/terminfo`
+- Install tmux resurrect
     
-### Create sym links
+### Create sym links (vimrc, tmux)
 eg. `~/.config/nvim/init.vim` for neovim or `~/.vimrc` for vim
