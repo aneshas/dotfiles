@@ -129,3 +129,7 @@ export PATH=$PATH:$HOME/sh
 
 # TS
 export GOPRIVATE=bitbucket.org/gv24,gitlab.thinksurance.de
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
+
+export PATH="$PATH:/Users/anes.hasicic/.dotnet/tools"

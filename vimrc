@@ -73,7 +73,7 @@ call plug#end()
 set background=dark
 " let g:hybrid_custom_term_colors = 1
 " let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
-" colorscheme hybrid
+colorscheme hybrid
 " colorscheme monokai
 " colorscheme one
 " colorscheme gruvbox
@@ -83,7 +83,7 @@ let g:gruvbox_material_better_performance = 1
 " let g:gruvbox_material_background = 'soft'
 " let g:gruvbox_material_disable_italic_comment = 1
 let g:gruvbox_material_foreground = 'mix'
-colorscheme gruvbox-material
+" colorscheme gruvbox-material
 " colorscheme molokai
 " autocmd BufNewFile,BufRead *.go colorscheme gitgo
 
